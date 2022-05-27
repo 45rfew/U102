@@ -1,3 +1,20 @@
+Public Class frmpizzaorder
+    Private Sub btnorder_Click(sender As Object, e As EventArgs) Handles btnorder.Click
+        Dim total As Integer, order = True, flavours() As String = {"pineapple", "meatlover", "vegan", "fruit"},
+          prices = {7, 10, 12, 15}, fprices = {10, 5, 7, 20}, sizes() As RadioButton = {optsmall, optmed, optlarge, optextra}
+        For i = 0 To 3
+            If sizes(i).Checked Then total = prices(i)
+            If cboflavour.Text.ToString() = flavours(i) Then total += fprices(i)
+            If Not flavours.Any(Function(s) s.Equals(cboflavour.Text.ToString(), StringComparison.InvariantCultureIgnoreCase)) Then
+                order = False
+            End If
+        Next
+        If chkdeliver.Checked Then total += 5
+        If order Then MessageBox.Show("your total is " & total) Else MessageBox.Show("please selcect a base")
+    End Sub
+End Class
+
+
 Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If ValidateInput(TextBox1.Text, "String") Then
